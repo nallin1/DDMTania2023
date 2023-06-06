@@ -11,7 +11,8 @@ class _CalcPageState extends State<CalcPage> {
   double n1 = 0;
   double n2 = 0;
   String result = "";
-  TextEditingController textInputController = TextEditingController();
+  TextEditingController textInputController1 = TextEditingController();
+  TextEditingController textInputController2 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +35,7 @@ class _CalcPageState extends State<CalcPage> {
               child: Padding(
                 padding: EdgeInsets.only(top: 30, bottom: 20),
                 child: TextField(
+                  controller: textInputController1,
                   decoration: InputDecoration(
                       labelText: "Número 1",
                       border: OutlineInputBorder(
@@ -46,6 +48,7 @@ class _CalcPageState extends State<CalcPage> {
               child: Padding(
                 padding: EdgeInsets.only(top: 0, bottom: 30),
                 child: TextField(
+                  controller: textInputController2,
                   decoration: InputDecoration(
                       labelText: "Número 2",
                       border: OutlineInputBorder(
@@ -58,7 +61,14 @@ class _CalcPageState extends State<CalcPage> {
               children: [
                 FloatingActionButton(
                   onPressed: () {
-                    
+                    n1 = double.parse(textInputController1.text);
+                    n2 = double.parse(textInputController2.text);
+                    result = (n1 + n1).toString();
+                    setState(() {
+                      
+                    });
+                    textInputController1.clear();
+                    textInputController2.clear();
                   },
                   child: Icon(Icons.add),
                 ),
