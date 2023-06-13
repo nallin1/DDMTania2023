@@ -77,6 +77,12 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             IconButton(
+              icon: Icon(Icons.people),
+              onPressed: () { 
+                Navigator.pushNamed(context, '/cadastrarAluno');
+              },
+            ),
+            IconButton(
               icon: Icon(Icons.calculate),
               onPressed: () {
                 Navigator.pushNamed(context, '/calculadora');

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forms_flutter/cadastrar_aluno.dart';
 
 import 'calc_page.dart';
 import 'home_page.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => HomePage(),
         '/calculadora': (context) => CalcPage(),
+        '/cadastrarAluno': (context) => const CadastrarAluno(),
       },
       title: 'Flutter Demo',
       theme: ThemeData(
