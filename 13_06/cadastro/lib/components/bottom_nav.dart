@@ -12,30 +12,34 @@ class _MyBottomNavState extends State<MyBottomNav> {
   Widget build(BuildContext context) {
     int selectedIndex = 0;
     return BottomNavigationBar(
-      currentIndex: selectedIndex,
-      selectedItemColor: Colors.lightBlue,
-      items: [
-        BottomNavigationBarItem(
-          label: 'Home',
-          icon: Icon(Icons.home),
-        ),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Clientes'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag), label: 'Produtos'),
-      ],
-      backgroundColor: Colors.grey[200],
-      onTap: (int index) {
-        setState(() {
-          selectedIndex = index;
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Início',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            label: 'Clientes',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'Produtos',
+          ),
+        ],
+        fixedColor: Colors.grey,
+        onTap: (int index) {
+          setState(() {
+            selectedIndex = index;
+          });
+          if (index == 0) {
+            Navigator.pushNamed(context, '/');
+          }
+          if (index == 1) {
+            Navigator.pushNamed(context, '/cadastroClientes');
+          }
+          if (index == 2) {
+            Navigator.pushNamed(context, '/cadastroProdutos');
+          }
         });
-        if (index == 0) {
-          Navigator.pushNamed(context, '/');
-        } else if (index == 1) {
-          Navigator.pushNamed(context, '/cadastroClientes');
-        } else if (index == 2) {
-          Navigator.pushNamed(context, '/cadastroProdutos');
-        }
-      },
-    );
   }
 }
