@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frm_flutter/home.dart';
 import 'package:frm_flutter/second.dart';
-import 'package:frm_flutter/third.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -17,8 +17,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const Home(),
-        '/second': (context) => const SecondPage(),
-        '/third': (context) => const ThirdPage(),
+        '/second': (context) => const SecondPage(email: "", nome: "", senha: ""),
       },
       title: 'Form',
       theme: ThemeData(

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:frm_flutter/second.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -11,7 +12,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _login_form_key = GlobalKey<FormState>();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _senhaController = TextEditingController();
 
+  String email = "";
+  String nome = "";
+  String senha = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +40,7 @@ class _HomeState extends State<Home> {
                   SizedBox(
                     width: 300,
                     child: TextFormField(
+                      controller: _nameController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Digite um nome';
@@ -50,6 +58,7 @@ class _HomeState extends State<Home> {
                   SizedBox(
                     width: 300,
                     child: TextFormField(
+                      controller: _emailController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Digite um texto';
@@ -62,8 +71,27 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 50),
+                  SizedBox(height: 20),
                   // buttom for login
+                  SizedBox(
+                    width: 300,
+                    child: TextFormField(
+                      obscureText: true,
+                      controller: _senhaController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Digite um texto';
+                        }
+                        return null;
+                        
+                      },
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Senha',
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 50),
                   SizedBox(
                     width: 200,
                     height: 50,
@@ -74,8 +102,11 @@ class _HomeState extends State<Home> {
                       ),
                       onPressed: () {
                         if (_login_form_key.currentState!.validate()) {
-                          // snackbar 
-                          Navigator.pushNamed(context, '/second');
+                          nome = _nameController.text;
+                          email = _emailController.text;
+                          senha = _senhaController.text;
+
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SecondPage(nome: nome, email: email, senha: senha)));
                         }
                       },
                       child: const Text(
