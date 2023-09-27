@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:floricultura/model/flor.dart';
 import 'package:floricultura/model/flor_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,6 @@ class _CadastrarFloresState extends State<CadastrarFlores> {
   final quantidadeController = TextEditingController();
   final precoController = TextEditingController();
   final categoriaController = TextEditingController();
-  FlorRepository florRepository = FlorRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -35,77 +35,83 @@ class _CadastrarFloresState extends State<CadastrarFlores> {
             SizedBox(
               width: 0.8 * (MediaQuery.of(context).size.width),
               child: Form(
-                key: _formKey,
-                child: Column(
-              children: [
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Por favor, informe a espécie';
-                    }
-                    return null;
-                  },
-                  controller: especieController,
-                  decoration: InputDecoration(
-                    labelText: 'Espécie',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 20),
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Por favor, informe a quantidade';
-                    }
-                    return null;
-                  },
-                  controller: quantidadeController,
-                  decoration: InputDecoration(
-                    labelText: 'Quantidade',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 20),
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Por favor, informe a preço';
-                    }
-                    return null;
-                  },
-                  controller: precoController,
-                  decoration: InputDecoration(
-                    labelText: 'Preço',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 20),
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Por favor, informe a categoria';
-                    }
-                    return null;
-                  },
-                  controller: categoriaController,
-                  decoration: InputDecoration(
-                    labelText: 'Categoria',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 30),
-                // botao para enviar
-                FloatingActionButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      
-                      Navigator.pushNamed(context, '/listaFlores');
-                    }
-                  },
-                  child: Icon(Icons.send),
-                ),
-              ],
-            )),
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Por favor, informe a espécie';
+                          }
+                          return null;
+                        },
+                        controller: especieController,
+                        decoration: InputDecoration(
+                          labelText: 'Espécie',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Por favor, informe a quantidade';
+                          }
+                          return null;
+                        },
+                        controller: quantidadeController,
+                        decoration: InputDecoration(
+                          labelText: 'Quantidade',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Por favor, informe a preço';
+                          }
+                          return null;
+                        },
+                        controller: precoController,
+                        decoration: InputDecoration(
+                          labelText: 'Preço',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Por favor, informe a categoria';
+                          }
+                          return null;
+                        },
+                        controller: categoriaController,
+                        decoration: InputDecoration(
+                          labelText: 'Categoria',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      SizedBox(height: 30),
+                      // botao para enviar
+                      FloatingActionButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            final Flor flor = Flor(
+                                especieController.text,
+                                int.parse(quantidadeController.text),
+                                double.parse(precoController.text),
+                                categoriaController.text);
+
+                            FlorRepository.addFlor(flor);
+                            Navigator.pushNamed(context, '/listaFlores');
+                          }
+                        },
+                        child: Icon(Icons.send),
+                      ),
+                    ],
+                  )),
             )
           ],
         ),
