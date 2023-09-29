@@ -5,11 +5,19 @@ class FlorRepository {
 
   // get
   static List<Flor> get flores => _flores;
-   
+
   // set
   static set flores(List<Flor> flores) => _flores = flores;
 
-  void addFlor(Flor flor) => _flores.add(flor);
+  void addFlor(Flor flor) {
+    for (Flor element in _flores) {
+      if (element.especie == flor.especie) {
+        throw Exception("Flor já cadastrada");
+      } else {
+        _flores.add(element); // add flor
+      }
+    }
+  }
 
   static void removeFlor(Flor flor) => _flores.remove(flor);
 
@@ -29,14 +37,16 @@ class FlorRepository {
     }
   }
 
-  /*
-  static void updateFlor(String especie, double preco) {
-    Flor flor = getFlorByEspecie(especie);
+  static void updateFlor(Flor flor) {
+    for (var element in _flores) {
+      if (element.especie == flor.especie) {
+        deleteFlor(element);
+      }
+    }
+    _flores.add(flor);
   }
-  */
 
   static void deleteFlor(Flor flor) {
     _flores.remove(flor);
   }
-
 }

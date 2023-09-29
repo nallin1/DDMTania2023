@@ -107,7 +107,8 @@ class _CadastrarFloresState extends State<CadastrarFlores> {
                       FloatingActionButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            final Flor flor = Flor(
+                            try {
+                              final Flor flor = Flor(
                                 especieController.text,
                                 int.parse(quantidadeController.text),
                                 double.parse(precoController.text),
@@ -117,6 +118,10 @@ class _CadastrarFloresState extends State<CadastrarFlores> {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text('Flor cadastrada!')));
                             Navigator.pushNamed(context, '/listaFlores');
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Flor já cadastrada...')));
+                            }
                           }
                         },
                         child: Icon(Icons.send),

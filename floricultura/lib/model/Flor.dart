@@ -15,4 +15,5 @@ class Flor {
   set peso(int quantidade) => _quantidade = quantidade;
   set preco(double preco) => _preco = preco;
   set categoria(String categoria) => _categoria = categoria;
+  set quantidade(int quantidade) => _quantidade = quantidade;
 }

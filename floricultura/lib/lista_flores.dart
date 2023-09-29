@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:floricultura/alterar_flores.dart';
 import 'package:floricultura/model/Flor.dart';
 import 'package:flutter/material.dart';
 
@@ -104,14 +105,15 @@ class _Lista_FloresState extends State<Lista_Flores> {
                               Expanded(
                                 child: IconButton(
                                     onPressed: () {
-                                      /*
-                                      Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) {
-                                        return UpdateAluno(
-                                            aluno: listaBusca[index],
-                                            indice: index);
-                                      }));
-                                      */
+                                      
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AlterarFlores(
+                                                    florAlterada: listaFlores[index],
+                                                  )));
+                                      
                                     },
                                     icon: Icon(
                                       Icons.edit,
