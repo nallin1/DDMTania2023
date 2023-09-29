@@ -3,8 +3,6 @@ import 'package:floricultura/cadastrar_flores.dart';
 import 'package:floricultura/lista_flores.dart';
 import 'package:flutter/material.dart';
 
-
-
 void main() {
   runApp(const MyApp());
 }
@@ -19,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => const CadastrarFlores(),
-        '/listaFlores': (context) => const ListarFlores(),
+        '/listaFlores': (context) => const Lista_Flores(),
         '/alterarFlores': (context) => const AlterarFlores(),
       },
       title: 'Flutter Demo',

@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:floricultura/model/flor.dart';
+import 'package:floricultura/model/Flor.dart';
 import 'package:floricultura/model/flor_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -19,9 +19,18 @@ class _CadastrarFloresState extends State<CadastrarFlores> {
   final precoController = TextEditingController();
   final categoriaController = TextEditingController();
 
+  FlorRepository floresRepo = FlorRepository();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'Floricultura',
+          style: TextStyle(fontWeight: FontWeight.w300),
+        ),
+      ),
       body: Center(
         child: Column(
           children: [
@@ -104,7 +113,9 @@ class _CadastrarFloresState extends State<CadastrarFlores> {
                                 double.parse(precoController.text),
                                 categoriaController.text);
 
-                            FlorRepository.addFlor(flor);
+                            floresRepo.addFlor(flor);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Flor cadastrada!')));
                             Navigator.pushNamed(context, '/listaFlores');
                           }
                         },

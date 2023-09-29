@@ -1,6 +1,6 @@
-import 'package:floricultura/model/flor.dart';
+import 'package:floricultura/model/Flor.dart';
 
-abstract class FlorRepository {
+class FlorRepository {
   static List<Flor> _flores = [];
 
   // get
@@ -9,7 +9,7 @@ abstract class FlorRepository {
   // set
   static set flores(List<Flor> flores) => _flores = flores;
 
-  static void addFlor(Flor flor) => _flores.add(flor);
+  void addFlor(Flor flor) => _flores.add(flor);
 
   static void removeFlor(Flor flor) => _flores.remove(flor);
 
@@ -34,5 +34,9 @@ abstract class FlorRepository {
     Flor flor = getFlorByEspecie(especie);
   }
   */
+
+  static void deleteFlor(Flor flor) {
+    _flores.remove(flor);
+  }
 
 }
