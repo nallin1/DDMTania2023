@@ -15,12 +15,12 @@ class AlterarFlores extends StatefulWidget {
 }
 
 class _AlterarFloresState extends State<AlterarFlores> {
-  
   final especieController = TextEditingController();
   final quantidadeController = TextEditingController();
   final precoController = TextEditingController();
   final categoriaController = TextEditingController();
-
+  // form key
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +33,7 @@ class _AlterarFloresState extends State<AlterarFlores> {
           child: SizedBox(
             width: 0.8 * (MediaQuery.of(context).size.width),
             child: Form(
+              key: formKey,
               child: Column(children: [
                 SizedBox(height: 20),
                 TextFormField(
@@ -45,6 +46,9 @@ class _AlterarFloresState extends State<AlterarFlores> {
                 ),
                 SizedBox(height: 20),
                 TextFormField(
+                  onChanged: (value) {
+                    widget.florAlterada.quantidade = int.parse(value);
+                  },
                   initialValue: widget.florAlterada.quantidade.toString(),
                   decoration: InputDecoration(
                     labelText: 'Quantidade',
@@ -53,6 +57,10 @@ class _AlterarFloresState extends State<AlterarFlores> {
                 ),
                 SizedBox(height: 20),
                 TextFormField(
+                  onChanged: (value) {
+                    widget.florAlterada.preco = double.parse(value);
+
+                  },
                   initialValue: widget.florAlterada.preco.toString(),
                   decoration: InputDecoration(
                     labelText: 'Preço',
@@ -61,6 +69,9 @@ class _AlterarFloresState extends State<AlterarFlores> {
                 ),
                 SizedBox(height: 20),
                 TextFormField(
+                  onChanged: (value) {
+                    widget.florAlterada.categoria = value;
+                  },
                   initialValue: widget.florAlterada.categoria,
                   decoration: InputDecoration(
                     labelText: 'Categoria',
@@ -68,19 +79,17 @@ class _AlterarFloresState extends State<AlterarFlores> {
                   ),
                 ),
                 SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    Flor florAlterada = Flor(
-                        especieController.text,
-                        int.parse(quantidadeController.text),
-                        double.parse(precoController.text),
-                        categoriaController.text);
-                    
-                    FlorRepository.updateFlor(florAlterada);
-                    Navigator.pushNamed(context, '/listaFlores');
-                  },
-                  child: Text('Alterar'),
-                ),
+                FloatingActionButton(
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        FlorRepository.updateFlor(widget.florAlterada);
+                        Navigator.pop(context);
+                      } else {
+                        print('Formulário inválido');
+                      }
+                      
+                    },
+                    child: const Icon(Icons.save)),
               ]),
             ),
           ),

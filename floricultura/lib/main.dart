@@ -1,4 +1,4 @@
-import 'package:floricultura/alterar_flores.dart';
+//import 'package:floricultura/alterar_flores.dart';
 import 'package:floricultura/cadastrar_flores.dart';
 import 'package:floricultura/lista_flores.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => const CadastrarFlores(),
-        '/listaFlores': (context) => const Lista_Flores(),
+        "/listaFlores": (context) => const Lista_Flores(),
         //'/alterarFlores': (context) => const AlterarFlores(florAlterada: ),
       },
       title: 'Flutter Demo',
