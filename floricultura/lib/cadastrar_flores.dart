@@ -26,12 +26,30 @@ class _CadastrarFloresState extends State<CadastrarFlores> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        elevation: double.minPositive,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Feito por Ana & Nallin 💚"),
+          ],
+        ),
+      ),
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
           'Floricultura',
           style: TextStyle(fontWeight: FontWeight.w300),
+          
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, "/listaFlores");
+            },
+            icon: Icon(Icons.list_alt_rounded),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
