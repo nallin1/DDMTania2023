@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const CadastrarFlores(),
         "/listaFlores": (context) => const Lista_Flores(),
-        //'/alterarFlores': (context) => const AlterarFlores(florAlterada: ),
       },
       title: 'Flutter Demo',
       theme: ThemeData(

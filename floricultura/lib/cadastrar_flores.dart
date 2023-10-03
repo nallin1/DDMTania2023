@@ -21,6 +21,8 @@ class _CadastrarFloresState extends State<CadastrarFlores> {
 
   FlorRepository floresRepo = FlorRepository();
 
+  var catFlores = ['Orquídea', 'Rosa', 'Girassol', 'Margarida', 'Tulipa'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +52,9 @@ class _CadastrarFloresState extends State<CadastrarFlores> {
                       TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Por favor, informe a espécie';
+                            return 'Por favor, informe uma espécie válida';
+                          } else if (value.length < 5) {
+                            return 'A espécie deve ter no mínimo 5 caracteres';
                           }
                           return null;
                         },
@@ -64,7 +68,7 @@ class _CadastrarFloresState extends State<CadastrarFlores> {
                       TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Por favor, informe a quantidade';
+                            return 'Por favor, informe a quantidade válida';
                           }
                           return null;
                         },
@@ -109,18 +113,19 @@ class _CadastrarFloresState extends State<CadastrarFlores> {
                           if (_formKey.currentState!.validate()) {
                             try {
                               final Flor flor = Flor(
-                                especieController.text,
-                                int.parse(quantidadeController.text),
-                                double.parse(precoController.text),
-                                categoriaController.text);
+                                  especieController.text,
+                                  int.parse(quantidadeController.text),
+                                  double.parse(precoController.text),
+                                  categoriaController.text);
 
-                            floresRepo.addFlor(flor);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Flor cadastrada!')));
-                            Navigator.pushNamed(context, '/listaFlores');
+                              floresRepo.addFlor(flor);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Flor cadastrada!')));
+                              Navigator.pushNamed(context, '/listaFlores');
                             } catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Flor já cadastrada...')));
+                                  SnackBar(
+                                      content: Text('Flor já cadastrada...')));
                             }
                           }
                         },

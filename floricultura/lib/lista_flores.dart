@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:floricultura/alterar_flores.dart';
+import 'package:floricultura/descricao_flor.dart';
 import 'package:floricultura/model/Flor.dart';
 import 'package:flutter/material.dart';
 
@@ -73,6 +74,14 @@ class _Lista_FloresState extends State<Lista_Flores> {
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, index) {
                     return ListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DescricaoFlor(
+                                      flor: listaBuscaFlores[index],
+                                    )));
+                      },
                       leading: CircleAvatar(
                         child: Text(
                           listaBuscaFlores[index].especie[0].toString(),
@@ -105,15 +114,14 @@ class _Lista_FloresState extends State<Lista_Flores> {
                               Expanded(
                                 child: IconButton(
                                     onPressed: () {
-                                      
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   AlterarFlores(
-                                                    florAlterada: listaFlores[index],
+                                                    florAlterada:
+                                                        listaFlores[index],
                                                   )));
-                                      
                                     },
                                     icon: Icon(
                                       Icons.edit,
